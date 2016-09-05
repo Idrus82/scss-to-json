@@ -50,7 +50,5 @@ if (opts.version) {
   var file = parsePath(file)['dir']+'/'+parsePath(file)['name']+'.json';
   var obj = result;
 
-  jsonfile.writeFile(file, obj, {spaces: 2}, function(err) {
-    console.error(err)
-  });
+  jsonfile.writeFile(file, obj, {spaces: 2}, function(err) {});
 }

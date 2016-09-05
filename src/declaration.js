@@ -26,6 +26,12 @@ Declaration.prototype = {
     this.value = new Value(replacedValue);
     this.global = hasGlobalFlag(replacedValue);
 
+
+    // It's a scss map. Convert the map to a json array instead of a string
+    if ( this.value.value.indexOf('{') !== -1 ) {
+      this.value.value = JSON.parse(this.value.value);
+    }
+
     declarationStore.addDeclaration(this);
   }
 };
