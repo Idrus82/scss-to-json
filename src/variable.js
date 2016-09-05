@@ -9,6 +9,7 @@ function Variable(scssString) {
 Variable.prototype = {
   _parse: function(scssString) {
     this.value = utilities.stripSpaces(scssString);
+    this.value = utilities.removeDollar(scssString);
   }
 };
 

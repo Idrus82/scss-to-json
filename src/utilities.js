@@ -9,6 +9,10 @@ var Utilities = {
     return scssString.replace(/\s/g, '');
   },
 
+  removeDollar: function(scssString) {
+    return scssString.replace(/[$]/g, '');
+  },
+
   removeFlags: function(value) {
     return value.replace(/\!\w+/g, '');
   },

@@ -5,7 +5,7 @@ var Declaration = require('./declaration');
 var DeclarationStore = require('./declarationStore');
 var utilities = require('./utilities');
 
-var LINE_DELIMITER = '\n';
+var LINE_DELIMITER = ';';
 var COMMENT_DELIMETER = '//';
 var EMPTY_LINES = ['', '\n', '\s'];
 
@@ -84,6 +84,11 @@ function declarationsFromString(path, declarationStore, options) {
   if (hasScope(options)) {
     data = extractScope(data, options.scope);
   }
+
+
+  // scss maps to single lines..
+  var data = data.replace(/\s/g, '');
+  // TODO: strip comments
 
   var lines = String(data).split(LINE_DELIMITER).map(normalizeLines).filter(filterLines);
   return lines.map(function(line) {
