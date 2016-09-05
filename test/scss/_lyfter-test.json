@@ -1,0 +1,6 @@
+{
+  "test": "#fff",
+  "test2": "black",
+  "colors": "(brand-primary:#61B8E7,brand-secondary:#31343C,brand-tertiary:#166793,border-color:#eeeeee)",
+  "menu": "(type:'boxed',height:82px,background:#FFF,text:var($colors,brand-secondary),text_hover:var($colors,brand-tertiary))"
+}
