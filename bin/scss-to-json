@@ -6,6 +6,10 @@ var fs = require('fs');
 var path = require('path');
 var minimist = require('minimist');
 
+var jsonfile = require('jsonfile');
+var parsePath = require('parse-filepath');
+
+
 var scssToJson = require('../');
 var opts = minimist(process.argv.slice(2), {
   alias: {
@@ -40,5 +44,10 @@ if (opts.version) {
   }
 
   var result = JSON.stringify(scssToJson(file, options), null, 2);
-  console.log(result);
+  //console.log(result);
+  
+  var file = parsePath(file)['dir']+'/'+parsePath(file)['name']+'.json';
+  var obj = result;
+
+  jsonfile.writeFileSync(file, obj)
 }
