@@ -86,9 +86,15 @@ function declarationsFromString(path, declarationStore, options) {
   }
 
 
+  // Strip multiline comments /* .... */
+  data = data.replace(/\/\*[^\*]+\*\//g, '');
+
+  // Strip single line comments // ...
+  data = data.replace(/\/\/(.*)$/gm, '');
+
+
   // scss maps to single lines..
   var data = data.replace(/\s/g, '');
-  // TODO: strip comments
 
   var lines = String(data).split(LINE_DELIMITER).map(normalizeLines).filter(filterLines);
   return lines.map(function(line) {
