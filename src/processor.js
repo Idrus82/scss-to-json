@@ -90,9 +90,17 @@ function declarationsFromString(path, declarationStore, options) {
   data = data.replace(/\/\*[^\*]+\*\//g, '');
 
   // Strip single line comments // ...
-  data = data.replace(/\/\/(.*)$/gm, '');
-  
+  // data = data.replace(/\/\/(.*)$/gm, ''); // old one.
+  data = data.replace(/[^:]\/\/(.*)$/gm, ''); // this is not a very good regex
+
   var lines = String(data).split(LINE_DELIMITER).filter(filterLines);
+
+  // console.log('\n\n------------------------------------------');
+  // lines.forEach(function(entry) {
+  //   console.log('\n-------------- **');
+  //   console.log(entry);
+  // });
+  // console.log('------------------------------------------\n\n');
 
   return lines.map(function(line) {
     return new Declaration(line, declarationStore);
