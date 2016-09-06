@@ -91,12 +91,9 @@ function declarationsFromString(path, declarationStore, options) {
 
   // Strip single line comments // ...
   data = data.replace(/\/\/(.*)$/gm, '');
+  
+  var lines = String(data).split(LINE_DELIMITER).filter(filterLines);
 
-
-  // scss maps to single lines..
-  var data = data.replace(/\s/g, '');
-
-  var lines = String(data).split(LINE_DELIMITER).map(normalizeLines).filter(filterLines);
   return lines.map(function(line) {
     return new Declaration(line, declarationStore);
   });

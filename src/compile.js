@@ -12,46 +12,64 @@ function unwrapValue(value) {
 }
 
 function scssMapToJsonArray(value) {
-  var jsonArray = value;
 
-  // replace first ( with {
-  jsonArray = jsonArray.replace(/\(/, '{');
+  var json = value;
 
-  // replaced last ) with }
-  jsonArray = jsonArray.replace(/[)]$/, '}');
+  // Every scss map key and value to array
+  var mapArray = json.split('\n');
 
-  // remove qoutes (singles and doubles)
-  jsonArray = jsonArray.replace(/\s*\'\s*/g, '');
-  jsonArray = jsonArray.replace(/\s*\"\s*/g, '');
-
-  // replace first { with {"
-  jsonArray = jsonArray.replace(/\{/, '{"');
-
-  // replace last } with "}
-  jsonArray = jsonArray.replace(/[}]$/, '"}');
-
-  // replace : with ":"
-  jsonArray = jsonArray.replace(/[:]/g, '":"');
-
-  // replace , with ","
-  jsonArray = jsonArray.replace(/[,]/g, '","');
+  // remove first and last from array if ( and )
+  if ( mapArray[0] === '(' ) {
+    mapArray.splice(0, 1);
+  }
+  if ( mapArray[mapArray.length-1] === ')' ) {
+    mapArray.splice(mapArray.length-1, 1);
+  }
 
 
+  var scssMap = {};
 
-  // Get part of string  between var( and first )
-  var re = /var\([^"][^)]*\)/g;
-  re.exec(jsonArray);
-  var scssVarFunction = RegExp.lastMatch;
 
-  // Remove qoutes.
-  scssVarFunction = scssVarFunction.replace(/["']/g, "");
+  // Build object of scss map.
+  mapArray.forEach(function(mapLine) {
+    var mapValuesArray = mapLine.split(':');
 
-  // Replaced part that is stripped from qoutes with orignial part with qoutes.
-  jsonArray = jsonArray.replace(re, scssVarFunction);
+    // Split single scss map line into array.
+    // And build object based on this values.
+    // So. 'border : #FFF,' becomes:
+    // [0] = 'border' and [1] = #FFF,
+
+    if (mapValuesArray[1] != undefined) {
+      var key = mapValuesArray[0];
+      var val = mapValuesArray[1];
 
 
 
-  return jsonArray;
+      // Remove leading whitespace
+      key = key.replace(/^ +/gm, '');
+
+      // Remove whitespace at end of line
+      key = key.replace(/[ \t]+$/gm, '');
+
+
+      // Remove last ,
+      val = val.replace(/\,(?=[^,]*$)/, '');
+
+      // Remove leading whitespace
+      val = val.replace(/^ +/gm, '');
+
+      // Remove whitespace at end of line
+      val = val.replace(/[ \t]+$/gm, '');
+
+
+      scssMap[key] = val;
+    }
+
+  });
+
+  json = JSON.stringify(scssMap);
+
+  return json;
 }
 
 var Compile = {
