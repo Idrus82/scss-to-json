@@ -1,19 +1,536 @@
-$test: #fff;
-$test2: black;
+
+/*
+|----------------------------------------------------------
+| GOOGLE FONT
+|----------------------------------------------------------
+*/
+
+@import url(https://fonts.googleapis.com/css?family=Exo:400,100,200,300,500,600,700,800,900);
+
+$font-body : 'Exo', sans-serif;
+$font-heading : 'Exo', serif;
+$base-font-size : 16px;
+
+
+
+
+
+
+
+/*
+|----------------------------------------------------------
+| 'MAIN' COLORS
+|----------------------------------------------------------
+*/
 
 $colors: (
-        brand-primary                   : #61B8E7,
-        brand-secondary                 : #31343C,
-        brand-tertiary                  : #166793,
+        brand-primary                   : #fff,
+        brand-secondary                 : #33aec0,
+        brand-tertiary                  : #333,
 
         border-color                    : #eeeeee
 );
 
-$menu: (
-        type 			                : 'boxed',
 
-        height                          : 82px,
+
+
+
+
+
+/*
+|----------------------------------------------------------
+| BASE ELEMENTS
+|----------------------------------------------------------
+*/
+
+
+//
+// BASE
+//---------------------------
+$base: (
+        boxed-layout                    : false,
+        boxed-body-bg                   : #EAEAEA, // used if - boxed-layout == true
+        boxed-max-width                 : 1200px,  // used if - boxed-layout == true
+
+        body-bg                         : #FAFAFA,
+
+        background-image-overlay        : true,
+        background-image-color          : var($colors, brand-tertiary),
+        background-image-color_opacity  : .4,
+        background-image_paralax        : true,
+
+        block-margin-padding			: 75px
+);
+
+
+//
+// Typo
+//---------------------------
+$typo: (
+        font-body                       : $font-body,
+        font-heading                    : $font-heading,
+
+        body-text                       : #444444,
+        body-heading-text               : #333333,
+        base-font-size                  : $base-font-size,
+
+        font-size-h1				    				: floor($base-font-size * 2.6),
+        font-size-h2				  				  : floor($base-font-size * 2.15),
+        font-size-h3			        			: ceil($base-font-size * 1.7),
+        font-size-h4			        			: ceil($base-font-size * 1.25),
+        font-size-h5			        			: $base-font-size,
+        font-size-h6			        			: $base-font-size,
+
+        heading_font-weight             : 700,
+        heading_text-transform          : uppercase,
+
+        heading_h1h2h3-bottom-margin    : 20px,
+        heading_h4h5h6-bottom-margin    : 10px,
+
+        heading_border-type             : 'none', // none, left, bottom-left, bottom-center
+        heading_border-color            : var($colors, brand-primary),
+        heading_border-thickness        : 5px,
+        heading_border-length           : 50px, // used for height is border type is 'left'
+        heading_border-spacebetween     : 15px
+);
+
+
+//
+// Menu
+//---------------------------
+$menu: (
+        centered_header                 : false,
+
+        height                          : 82px, // if centered is true this is the height of the logo, the height of menu items is set with text-padding
         background                      : #FFF,
-        text                            : var($colors, brand-secondary),
-        text_hover                      : var($colors, brand-tertiary)
+        text                            : lighten( var($colors, brand-tertiary), 50% ),
+        text_hover                      : var($colors, brand-tertiary),
+        text-padding                    : 32px 15px 30px 15px,
+        text-weight                     : 600,
+        text-size				        				: 14px,
+        text-transform		            	: uppercase,
+        text-font-family                : var($typo, font-heading),
+
+        menu-items-position             : right, // right, left
+        brand-name                      : var($colors, brand-secondary),
+        brand-logo				        			: true,
+        logo-padding-top-bottom	        : 10px,
+
+        fixed                           : false,
+        transparent-fixed               : false,
+
+        trans-fixed_text-start-color	: #fff // used if - transparent-fixed == true
+);
+
+
+//
+// Footer
+//---------------------------
+$footer : (
+        padding-top             : var($base, block-margin-padding),
+        padding-bottom          : var($base, block-margin-padding),
+    //--------------------------------------------------------
+
+        background                      : var($colors, brand-secondary),
+        title                           : var($colors, brand-primary),
+
+        text                            : #FFF,
+        text_hover                      : var($colors, brand-primary),
+        text_font-weight		        : 300
+);
+
+
+//
+// Footer - copyright
+//---------------------------
+$copyRightFooter : (
+        padding-top             : 15px,
+        padding-bottom          : 15px,
+    //--------------------------------------------------------
+
+        background                      : #444444,
+        text                            : #999999,
+        text_hover                      : #919191,
+
+        social-icon-size                : 22px
+);
+
+
+//
+// Buttons
+//---------------------------
+$button : (
+        border                          : false, // true, false - This reverts the colors
+        background                      : var($colors, brand-secondary),
+        background_hover                : darken( var($colors, brand-primary) , 10%),
+        text                            : #FFF,
+        text_hover                      : #FFF,
+        borderRadius                    : 0px
+);
+
+
+//
+// Forms
+//---------------------------
+$form : (
+        border                          : 1px solid var($colors, border-color),
+        border-radius 			        : 0px,
+
+        placeholder				        : #999
+);
+
+
+//
+// Page header
+//---------------------------
+$pageHeading : (
+        background-color                : var($colors, brand-tertiary),
+        padding_top-bottom              : 80px,
+
+        color					        : #FFF,
+        text-align	                    : center, // left, center, right
+
+);
+
+
+//
+// Blog item
+//---------------------------
+$blogItem : (
+        header-min-height               : 300px,
+        header-max-height               : 450px,
+        header-height                   : 35vh,
+        header-background-color         : var($base, brand-tertiary),
+
+        header-margin-bottom            : var($base, block-margin-padding),
+
+        header-title-color              : #FFF,
+        header-title-align              : left, // left, center, right
+);
+
+
+
+
+
+
+
+
+
+
+/*
+|----------------------------------------------------------
+| PAGEBLOCKS
+|----------------------------------------------------------
+*/
+
+
+//
+// Carousel
+//---------------------------
+$carousel: (
+        margin-top              : 0px,
+        margin-bottom           : 0px,
+    //--------------------------------------------------------
+
+        nav-button_show                 : true,
+        nav-buttons                     : var($colors, brand-primary),
+        nav-buttons_hover               : var($colors, brand-tertiary),
+        nav-background                  : var($colors, brand-secondary),
+        nav-background_hover            : darken( var($colors, brand-secondary) , 20%),
+        nav-border-radius               : 0px,
+        nav-button-size                 : 50px,
+        nav-button-prev_icon            : '\f104',  // Choose from https://fortawesome.github.io/Font-Awesome/icons/ like:  '\f060' , '\f053' , '\f104'
+        nav-button-next_icon            : '\f105',  // Choose from https://fortawesome.github.io/Font-Awesome/icons/ like:  '\f061' , '\f054' , '\f105'
+        nav-offset-from-side            : 15px,
+
+
+        textblock_h-position            : right, // left, center, right
+        textblock_v-position            : top,   // top, center, bottom
+        textblock_max-width             : 900px, // px, vw, %
+
+        textblock_h-sideOffset          : 100px,  // used if - not centered
+        textblock_v-SideOffset          : 50px,  // used if - not centered
+
+
+        text                            : var($colors, brand-primary),
+        text-size                       : 24px,
+        text-transform		            	: none,
+        text-background                 : rgba(0,0,0,0.6),
+        text-padding                    : 30px 50px 50px 50px,
+        text_alignment                  : left, // left, center, right
+        text-font-family                : var($typo, font-heading),
+        text-shadow                     : 0px 0px 3px rgba(0,0,0,.5),
+
+        indicator_show                  : true,
+        indicator                       : var($colors, brand-primary),
+        indicator_size                  : 12px,
+
+        height                          : 50vh
+);
+
+
+//
+// Wysiwyg
+//---------------------------
+$wysiwyg: (
+        padding-top             : var($base, block-margin-padding),
+        padding-bottom          : var($base, block-margin-padding)
+    //--------------------------------------------------------
+);
+
+
+//
+// Archive
+//---------------------------
+$archive : (
+        padding-top             : var($base, block-margin-padding),
+        padding-bottom          : var($base, block-margin-padding),
+    //--------------------------------------------------------
+
+        title                           : var($colors, brand-secondary),
+        date                            : var($colors, brand-tertiary),
+
+        image_hover-color	 	        : var($colors, brand-tertiary)
+);
+
+
+//
+// Welcome banner
+//---------------------------
+$welcomeBanner : (
+        padding-top             : 35vh,
+        padding-bottom          : 35vh,
+    //--------------------------------------------------------
+
+        background                      : transparent,
+        text                            : #ffffff,
+
+        h1_font-size                    : 36px,
+        h2_font-size                    : 20px,
+);
+
+
+//
+// Usp grid
+//---------------------------
+$uspGrid : (
+        padding-top             : var($base, block-margin-padding),
+        padding-bottom          : 15px,
+    //--------------------------------------------------------
+
+        background                      : var($colors, brand-secondary),
+        icon                            : var($colors, brand-primary),
+        title                           : white, //var($colors, brand-primary),
+        text_color                      : white, //var($colors, brand-primary),
+        icon_size                       : 4em,
+
+        margin-bottom                   : 45px,
+
+        icon_icon-above-text            : false,
+        icon_border-around-icon         : true,
+        icon_border-color               : #fff,
+        icon_border-background-fill     : transparent,
+        icon_border-radius              : 100%, // 50% is round, 0% is rectangular
+
+        image_border-radius             : 50%, // 5px, 15px, 0px, 50% (for circle)
+        image_max-size                  : 200px
+);
+
+
+//
+// Testiominals
+//---------------------------
+$testiominals: (
+        padding-top             : var($base, block-margin-padding),
+        padding-bottom          : var($base, block-margin-padding),
+    //--------------------------------------------------------
+
+        text                            : #FFF,
+        text_alignment                  : center, // left, center, right
+
+        nav_show                        : true,
+        nav_position                    : 'center-bottom', // 'center-bottom', 'center-top', 'left-right'
+
+        dots_show                       : false,
+        dots-color                      : var($colors, brand-primary),
+        dots-color_active               : white
+);
+
+
+//
+// Googlemap
+//---------------------------
+$googleMap: (
+        margin-top             : 0px,
+        margin-bottom          : 0px,
+    //--------------------------------------------------------
+
+        icon-color                      : var($colors, brand-secondary),
+        iconStroke-color                : var($colors, brand-secondary),
+        height                          : 450px
+);
+
+
+//
+// Latest project items
+//---------------------------
+$projects: (
+        padding-top             : var($base, block-margin-padding),
+        padding-bottom          : var($base, block-margin-padding),
+    //--------------------------------------------------------
+
+        background-color                : var($colors, brand-secondary),
+        overlay-color                   : var($colors, brand-primary),
+        heading                         : #FFF,
+        text                            : #FFF,
+        text_alignment                  : center, // left, center, right
+
+        hide-excerpt-text               : false,
+        show-text-on-hover              : true // hide text, but show on hover.
+);
+
+
+//
+// Image Gallery
+//---------------------------
+$imageGallery: (
+        padding-top             : var($base, block-margin-padding),
+        padding-bottom          : var($base, block-margin-padding),
+    //--------------------------------------------------------
+
+        background-color                : var($colors, brand-secondary),
+        overlay-color                   : var($colors, brand-primary),
+        text                            : #FFF,
+        text_alignment                  : center, // left, center, right
+        text_size                       : 20px,
+
+        show-text-on-hover              : true // hide text, but show on hover.
+);
+
+
+//
+// Image Grid
+//---------------------------
+$imageGrid: (
+        padding-top             : 0px,
+        padding-bottom          : var($base, block-margin-padding),
+    //--------------------------------------------------------
+
+        background-color                : var($colors, brand-secondary),
+        overlay-color                   : var($colors, brand-primary),
+        text                            : #FFF,
+        text_alignment                  : center, // left, center, right
+        text_size                       : 20px,
+        block-height                    : 100%,
+
+        show-text-on-hover              : true // hide text, but show on hover.
+);
+
+
+//
+// Text & Image
+//---------------------------
+$textImage: (
+        padding-top             : var($base, block-margin-padding),
+        padding-bottom          : var($base, block-margin-padding),
+    //--------------------------------------------------------
+);
+
+
+//
+// Breadcrumb
+//---------------------------
+$breadCrumb: (
+        padding-top                     : 10px,
+        padding-bottom                  : 10px,
+    //--------------------------------------------------------
+
+        background                      : none,
+
+        text-align                      : left,
+        text-size                       : 12px,
+        text-link-color                 : #777,
+        text-color                      : #999,
+
+        item-margin                     : 5px
+);
+
+
+
+//
+// Card grid
+//---------------------------
+$cardGrid : (
+        padding-top             : var($base, block-margin-padding),
+        padding-bottom          : var($base, block-margin-padding),
+    //--------------------------------------------------------
+
+        background_color				: none,
+
+        card_padding           			: 20px 20px 30px 20px,
+        card-bg_color            		: var($colors, brand-tertiary),
+        border							: 1px solid var($colors, brand-primary),
+        box-shadow						: 0px 0px 5px rgba(0,0,0,0.75),
+
+        icon_color                      : var($colors, brand-primary),
+        title_color                     : var($colors, brand-primary),
+        text_color                      : var($colors, brand-primary),
+
+        text_align						: left,
+
+        title-border					: true,
+        title-border_width				: 80%,
+        title-border_thickness			: 5px,
+        title-border_color				: var($colors, brand-primary),
+        title-border_offset				: 30px,
+
+        icon_size                       : 100px
+
+);
+
+
+
+
+
+
+
+
+/*
+|----------------------------------------------------------
+| Woocommerce
+|----------------------------------------------------------
+*/
+$enableWoocommerce: true;
+
+$wc: (
+        padding-top             : 30px,
+        padding-bottom          : var($base, block-margin-padding),
+    //--------------------------------------------------------
+
+        show-breadcrumb                 : true,
+
+        sale-ribbon-bg                  : #54C225,
+        sale-ribbon-text                : #333
+);
+
+
+
+//
+// WC Breadcrumb
+//---------------------------
+$wc-productPage: (
+        price-color                     : #54C225
+);
+
+
+
+//
+// WC Pagination
+//---------------------------
+$wc-pagination: (
+        border                          : 1px solid var($colors, brand-primary),
+        background                      : var($colors, brand-primary),
+        background_hover                : darken( var($colors, brand-primary) , 10%),
+        text                            : #FFF,
+        text_hover                      : #FFF,
 );
