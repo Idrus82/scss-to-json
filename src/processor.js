@@ -95,7 +95,7 @@ function declarationsFromString(path, declarationStore, options) {
 
 
   // Strip multiline comments /* .... */
-  data = data.replace(/\/\*[^\*]+\*\//g, '');
+  data = data.replace(/(\/\*([\s\S]*?)\*\/)|(\/\/(.*)$)/gm, '');
 
   // Strip single line comments // ...
   // data = data.replace(/\/\/(.*)$/gm, ''); // old one.
