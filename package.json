@@ -34,12 +34,15 @@
   },
   "dependencies": {
     "cssmin": "^0.4.3",
+    "jsonfile": "^2.3.1",
     "minimist": "^1.2.0",
-    "node-sass": "^3.1.2"
+    "node-sass": "^3.1.2",
+    "parse-filepath": "^1.0.1"
   },
   "devDependencies": {
     "cross-spawn": "2.0.0",
     "eslint": "1.9.0",
+    "file-save": "^0.2.0",
     "mocha": "2.2.5",
     "proxyquire": "1.6.0",
     "sinon": "1.15.4",

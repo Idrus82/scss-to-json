@@ -5,7 +5,7 @@ var Declaration = require('./declaration');
 var DeclarationStore = require('./declarationStore');
 var utilities = require('./utilities');
 
-var LINE_DELIMITER = '\n';
+var LINE_DELIMITER = ';';
 var COMMENT_DELIMETER = '//';
 var EMPTY_LINES = ['', '\n', '\s'];
 
@@ -93,7 +93,23 @@ function declarationsFromString(path, declarationStore, options) {
     data = extractScope(data, options.scope);
   }
 
-  var lines = String(data).split(LINE_DELIMITER).map(normalizeLines).filter(filterLines);
+
+  // Strip multiline comments /* .... */
+  data = data.replace(/\/\*[^\*]+\*\//g, '');
+
+  // Strip single line comments // ...
+  // data = data.replace(/\/\/(.*)$/gm, ''); // old one.
+  data = data.replace(/[^:]\/\/(.*)$/gm, ''); // this is not a very good regex
+
+  var lines = String(data).split(LINE_DELIMITER).filter(filterLines);
+
+  // console.log('\n\n------------------------------------------');
+  // lines.forEach(function(entry) {
+  //   console.log('\n-------------- **');
+  //   console.log(entry);
+  // });
+  // console.log('------------------------------------------\n\n');
+
   return lines.map(function(line) {
     return new Declaration(line, declarationStore);
   });
